@@ -1,0 +1,580 @@
+<!doctype html><html><head><meta charset=utf8><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2c4a82"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="رحلة العهد القديم"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="icon" type="image/svg+xml" href="icons/logo.svg"><link rel="icon" type="image/png" sizes="64x64" href="icons/favicon.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>رحلة العهد القديم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Reem+Kufi:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#f7f3e9;
+  --paper:#fffdf7;
+  --paper2:#faf4e3;
+  --ink:#262a3b;
+  --ink2:#5d6075;
+  --line:#e5dbbf;
+  --gold:#b0802a;
+  --gold-soft:#f2e4bc;
+  --lapis:#2c4a82;
+  --lapis-soft:#e4eaf6;
+  --rubric:#a3342b;
+  --rubric-soft:#f7e0dc;
+  --green:#3d7a52;
+  --green-soft:#e1f0e6;
+  --f-display:'Aref Ruqaa','Amiri','Traditional Arabic',serif;
+  --f-body:'Amiri','Traditional Arabic','Noto Naskh Arabic',serif;
+  --f-label:'Reem Kufi','Amiri',sans-serif;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);background-image:radial-gradient(circle at 15% 0%,#fff9e8 0,transparent 45%),radial-gradient(circle at 90% 30%,#f3ecd8 0,transparent 40%);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.7;padding-inline:16px;padding-block:22px 130px}
+.wrap{max-width:780px;margin-inline:auto;display:flex;flex-direction:column;gap:18px}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--lapis);outline-offset:2px}
+.top{text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;padding-block:6px}
+.top svg{width:64px;height:64px;border-radius:16px;box-shadow:0 4px 14px rgba(44,74,130,.25)}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(2rem,7vw,2.9rem);line-height:1.25;margin:0;color:var(--lapis);text-wrap:balance}
+.sub{margin:0;color:var(--ink2);font-size:1.02rem;text-wrap:balance}
+.orn{display:flex;align-items:center;gap:10px;color:var(--gold);width:min(320px,80%)}
+.orn::before,.orn::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.orn::after{transform:scaleX(-1)}
+.orn i{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
+.sync{font-family:var(--f-label);font-size:.78rem;color:var(--ink2);background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:2px 12px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:6px;box-shadow:inset 0 0 0 5px var(--paper),inset 0 0 0 6px var(--gold-soft);padding:22px 22px}
+.eyebrow{font-family:var(--f-label);font-weight:600;font-size:.82rem;letter-spacing:.04em;color:var(--rubric);margin:0}
+h2{font-family:var(--f-display);font-weight:700;font-size:1.65rem;line-height:1.3;margin:0;color:var(--ink);text-wrap:balance}
+.hero{display:flex;flex-direction:column;gap:12px}
+.range{margin:0;color:var(--lapis);font-size:1.15rem;font-weight:700}
+.muted{color:var(--ink2);margin:0}
+.seg{display:flex;flex-direction:column;gap:6px}
+.seg+.seg{margin-top:6px}
+.segname{font-weight:700;font-size:1rem;color:var(--ink)}
+.segname i{font-style:normal;font-family:var(--f-label);font-size:.7rem;color:var(--gold);border:1px solid var(--gold);border-radius:99px;padding:0 8px;margin-inline-start:6px;vertical-align:middle}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{position:relative;display:block}
+.chip input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;width:100%;height:100%}
+.chip span{display:grid;place-items:center;min-width:42px;height:42px;padding-inline:6px;border:1.5px solid var(--gold);border-radius:6px;background:var(--paper);font-family:var(--f-label);font-weight:500;font-size:.95rem;color:var(--ink);font-variant-numeric:tabular-nums;transition:background .15s,color .15s,transform .15s}
+.chip input:checked+span{background:var(--lapis);border-color:var(--lapis);color:#fff}
+.chip input:checked+span::after{content:"";position:absolute;top:3px;inset-inline-end:3px;width:9px;height:9px;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.5l3 3 5-6.5' fill='none' stroke='%23f2e4bc' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.chip input:focus-visible+span{outline:3px solid var(--lapis);outline-offset:2px}
+.chip input:active+span{transform:scale(.94)}
+.hero .chip span{min-width:48px;height:48px;font-size:1.05rem}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font-family:var(--f-label);font-weight:600;font-size:.95rem;border-radius:6px;padding:9px 18px;border:1.5px solid var(--lapis);background:var(--lapis);color:#fff}
+.btn.ghost{background:var(--paper);color:var(--lapis)}
+.btn.warn{border-color:var(--rubric);color:var(--rubric);background:var(--paper)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.prog{display:flex;align-items:center;gap:12px}
+.bar-track{flex:1;height:10px;border-radius:99px;background:var(--paper2);border:1px solid var(--line);overflow:hidden}
+.bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),#d6a74a);border-radius:99px;transition:width .5s}
+.prog b{font-family:var(--f-label);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.alert{background:var(--rubric-soft);border:1px solid #e8bdb7;color:var(--rubric);border-radius:6px;padding:8px 14px;margin:0;font-size:1rem}
+.streak{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:center}
+.flame{grid-row:span 2;display:flex;flex-direction:column;align-items:center;min-width:92px}
+.flame svg{width:64px;height:64px;filter:saturate(.35) opacity(.55)}
+.streak.on .flame svg{filter:none;animation:flick 2.4s ease-in-out infinite;transform-origin:50% 90%}
+.flame strong{font-family:var(--f-label);font-weight:600;font-size:2.4rem;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.flame small{font-size:.9rem;color:var(--ink2)}
+.streak h3{font-family:var(--f-display);font-size:1.3rem;margin:0}
+.streak .msg{margin:0;color:var(--ink2);font-size:1rem}
+.week7{grid-column:1/-1;display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:6px}
+.dot{display:flex;flex-direction:column;align-items:center;gap:3px;font-family:var(--f-label);font-size:.72rem;color:var(--ink2)}
+.dot i{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;background:var(--paper)}
+.dot.read i{background:var(--gold);border-color:var(--gold)}
+.dot.read i::after{content:"";width:11px;height:11px;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.5l3 3 5-6.5' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.dot.frozen i{background:var(--lapis-soft);border-color:var(--lapis)}
+.dot.frozen i::after{content:"ح";font-size:.8rem;color:var(--lapis)}
+.dot.today i{border-color:var(--rubric);border-width:2px}
+.mile{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:.92rem;color:var(--ink2)}
+.mile .bar-track{height:7px}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line)}
+.tab{font-family:var(--f-label);font-weight:600;font-size:1rem;background:none;border:0;border-bottom:3px solid transparent;padding:10px 16px;color:var(--ink2)}
+.tab[aria-selected="true"]{color:var(--lapis);border-bottom-color:var(--gold)}
+.tabs .spacer{flex:1}
+.jump{align-self:center;font-size:.85rem;padding:5px 12px}
+.week{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.week h4{font-family:var(--f-label);font-weight:600;font-size:.85rem;letter-spacing:.03em;color:var(--gold);margin:14px 0 2px;display:flex;gap:8px;align-items:center}
+.week h4::after{content:"";flex:1;height:1px;background:var(--line)}
+.day{background:var(--paper);border:1px solid var(--line);border-radius:6px;scroll-margin-top:12px}
+.day summary{list-style:none;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;cursor:pointer}
+.day summary::-webkit-details-marker{display:none}
+.seal{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;font-family:var(--f-label);font-weight:600;color:var(--gold);font-variant-numeric:tabular-nums;background:var(--paper2)}
+.dmeta{min-width:0;display:flex;flex-direction:column}
+.dmeta b{font-size:1.02rem}
+.dmeta small{color:var(--ink2);font-size:.95rem;line-height:1.4}
+.dside{display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-family:var(--f-label);font-size:.78rem;color:var(--ink2);font-variant-numeric:tabular-nums}
+.badge{font-weight:600;border-radius:99px;padding:0 10px}
+.day.today{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-soft)}
+.day.today .seal{background:var(--gold);color:#fff}
+.day.today .badge{background:var(--gold-soft);color:var(--gold)}
+.day.late .badge{background:var(--rubric-soft);color:var(--rubric)}
+.day.late .seal{border-color:var(--rubric);color:var(--rubric)}
+.day.done{background:var(--green-soft);border-color:#c5dccb}
+.day.done .seal{background:var(--green);border-color:var(--green);color:#fff}
+.day.done .badge{background:#fff;color:var(--green)}
+.dbody{padding:4px 14px 14px;display:flex;flex-direction:column;gap:10px;border-top:1px dashed var(--line)}
+.dbody .btn{align-self:flex-start;padding:5px 14px;font-size:.85rem}
+.bufcard{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.pips{display:flex;gap:8px;flex-wrap:wrap}
+.pip{width:34px;height:34px;border-radius:50%;border:1.5px dashed var(--gold);display:grid;place-items:center;font-family:var(--f-label);font-size:.8rem;color:var(--gold)}
+.pip.used{background:var(--lapis-soft);border:1.5px solid var(--lapis);color:var(--lapis)}
+.used-list{display:flex;flex-direction:column;gap:4px;margin:0;padding:0;list-style:none;font-size:.98rem}
+.used-list li{display:flex;gap:10px;align-items:center}
+.used-list button{font-size:.8rem;border:1px solid var(--line);background:var(--paper);border-radius:99px;padding:0 10px;color:var(--rubric)}
+.group h3{font-family:var(--f-display);font-size:1.35rem;margin:20px 0 8px;color:var(--lapis)}
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.book{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.book b{font-size:1.05rem}
+.book small{font-family:var(--f-label);font-size:.8rem;color:var(--ink2);font-variant-numeric:tabular-nums}
+.book .bar-track{height:7px}
+.book.done{background:var(--green-soft);border-color:#c5dccb}
+.stamp{position:absolute;top:8px;inset-inline-start:10px;width:46px;height:46px;border-radius:50%;border:2.5px double var(--rubric);color:var(--rubric);display:none;place-items:center;font-family:var(--f-display);font-weight:700;font-size:1.05rem;transform:rotate(-12deg);background:rgba(255,255,255,.6)}
+.book.done .stamp{display:grid}
+.stamp.pop{animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
+.dstamp{display:none;font-family:var(--f-display);font-size:.78rem;color:var(--rubric);border:1.5px double var(--rubric);border-radius:99px;padding:0 8px;transform:rotate(-4deg)}
+.dstamp.on{display:inline-block}
+.bar{position:fixed;inset-inline:0;bottom:0;z-index:5;background:var(--paper);border-top:2px solid var(--gold);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 18px rgba(80,60,20,.1)}
+.bar-in{max-width:780px;margin-inline:auto;display:grid;grid-template-columns:repeat(3,1fr);text-align:center;gap:8px}
+.cnt{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.cnt+.cnt{border-inline-start:1px solid var(--line)}
+.cnt strong{font-family:var(--f-label);font-weight:600;font-size:1.7rem;color:var(--lapis);font-variant-numeric:tabular-nums}
+.cnt span{font-size:.9rem;color:var(--ink2)}
+.toasts{position:fixed;inset-inline:0;bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:9;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;padding-inline:16px}
+.toast{background:var(--ink);color:#fff;border-radius:8px;padding:9px 18px;font-size:1rem;box-shadow:0 8px 24px rgba(0,0,0,.2);animation:rise .3s ease-out;max-width:100%}
+.toast.gold{background:var(--gold)}
+.toast.green{background:var(--green)}
+.finale{text-align:center;display:flex;flex-direction:column;gap:8px;align-items:center}
+@keyframes flick{0%,100%{transform:scale(1) rotate(-1deg)}50%{transform:scale(1.06) rotate(1.5deg)}}
+@keyframes pop{0%{transform:rotate(-12deg) scale(2.2);opacity:0}100%{transform:rotate(-12deg) scale(1);opacity:1}}
+@keyframes rise{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:480px){body{font-size:17px}.card{padding:18px 16px}.streak{grid-template-columns:1fr}.flame{grid-row:auto;flex-direction:row;gap:12px;justify-content:center}.day summary{gap:10px;padding:10px}.dside{font-size:.72rem}}
+</style>
+<div class="wrap" dir="rtl" lang="ar">
+  <header class="top"><svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#2c4a82"/><path d="M256 200C222 172 172 166 116 180V348C172 336 222 342 256 372Z" fill="#fffdf7"/><path d="M256 200C290 172 340 166 396 180V348C340 336 290 342 256 372Z" fill="#fffdf7"/><path d="M256 198V374" stroke="#b0802a" stroke-width="8"/><path d="M116 360L256 388L396 360V372L256 400L116 372Z" fill="#b0802a"/><path d="M256 76L264 106L294 94L282 120L312 120L286 134L304 160L274 148L256 164L238 148L208 160L226 134L200 120L230 120L218 94L248 106Z" fill="#d6a74a"/></svg>
+    <h1>رحلة العهد القديم</h1>
+    <p class="sub">العهد القديم والأسفار القانونية الثانية بدون أسفار موسى، 850 إصحاحًا والمزامير موزعة على كل الأيام</p>
+    <div class="orn"><i></i></div>
+    <p class="sub">من السبت 10 أكتوبر حتى الثلاثاء 29 ديسمبر، وأسبوع احتياطي لحد 5 يناير، وعيد الميلاد 6 يناير</p>
+    <span class="sync" id="sync">محفوظ على الجهاز</span>
+  </header>
+  <section class="card hero" id="hero" aria-live="polite"></section>
+  <section class="card streak" id="streak">
+    <div class="flame">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="fg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#a3342b"/><stop offset=".55" stop-color="#d9822b"/><stop offset="1" stop-color="#f2c14e"/></linearGradient></defs><path fill="url(#fg)" d="M12 2c.5 3-1.5 4.5-3 6.5C7.5 10.4 6 12 6 14.5A6 6 0 0 0 12 21a6 6 0 0 0 6-6.5c0-2.2-1-3.8-2.2-5.2-.3 1.200-.9 2-1.8 2.400.4-2.800-.6-6.200-2-9.700z"/><path fill="#fff6d6" opacity=".85" d="M12 21a3 3 0 0 1-3-3c0-1.400.9-2.200 1.600-3.200.4 1 1.100 1.300 1.600 1.300.6-.8.700-1.800.5-2.800 1.200 1 2.300 2.300 2.300 4.200A3 3 0 0 1 12 21z"/></svg>
+      <div><strong id="stNum">0</strong> <small>يوم</small></div>
+    </div>
+    <div>
+      <h3>سلسلة القراية</h3>
+      <p class="msg" id="stMsg"></p>
+    </div>
+    <div class="week7" id="week7"></div>
+    <div class="mile"><span id="mileTxt"></span><div class="bar-track"><div class="bar-fill" id="mileFill"></div></div></div>
+  </section>
+  <section class="card" id="overall">
+    <div class="prog"><b id="pctTxt">0%</b><div class="bar-track"><div class="bar-fill" id="pctFill"></div></div><b id="pctCnt"></b></div>
+  </section>
+  <div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="t-plan" aria-selected="true" data-tab="plan">الخطة اليومية</button>
+      <button class="tab" role="tab" id="t-books" aria-selected="false" data-tab="books">الأسفار</button>
+      <span class="spacer"></span>
+      <button class="btn ghost jump" data-act="jump">روح لليوم</button>
+    </div>
+    <div id="plan" role="tabpanel"></div>
+    <div id="booksPanel" role="tabpanel" hidden></div>
+  </div>
+</div>
+<div class="bar"><div class="bar-in">
+  <div class="cnt"><strong id="cToday">0</strong><span>قريت النهارده</span></div>
+  <div class="cnt"><strong id="cLeft">850</strong><span>إصحاح فاضل</span></div>
+  <div class="cnt"><strong id="cDays">0</strong><span>يوم لحد عيد الميلاد</span></div>
+</div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<script>
+const BOOKS=[["التكوين", 50], ["الخروج", 40], ["اللاويين", 27], ["العدد", 36], ["التثنية", 34], ["يشوع", 24], ["القضاة", 21], ["راعوث", 4], ["صموئيل الأول", 31], ["صموئيل الثاني", 24], ["الملوك الأول", 22], ["الملوك الثاني", 25], ["أخبار الأيام الأول", 29], ["أخبار الأيام الثاني", 36], ["عزرا", 10], ["نحميا", 13], ["طوبيا", 14], ["يهوديت", 16], ["أستير", 10], ["أيوب", 42], ["المزامير", 150], ["الأمثال", 31], ["الجامعة", 12], ["نشيد الأنشاد", 8], ["الحكمة", 19], ["يشوع بن سيراخ", 51], ["إشعياء", 66], ["إرميا", 52], ["مراثي إرميا", 5], ["باروخ", 6], ["حزقيال", 48], ["دانيال", 14], ["هوشع", 14], ["يوئيل", 3], ["عاموس", 9], ["عوبديا", 1], ["يونان", 4], ["ميخا", 7], ["ناحوم", 3], ["حبقوق", 3], ["صفنيا", 3], ["حجي", 2], ["زكريا", 14], ["ملاخي", 4]];
+const CUTS=[8, 16, 24, 32, 40, 49, 56, 64, 72, 80, 89, 97, 104, 111, 117, 123, 130, 138, 146, 154, 161, 168, 175, 183, 192, 201, 210, 219, 226, 234, 243, 253, 264, 275, 284, 293, 301, 310, 318, 326, 334, 342, 349, 359, 372, 380, 389, 398, 406, 414, 422, 430, 438, 447, 457, 468, 479, 489, 500, 510, 518, 526, 531, 540, 549, 558, 565, 574, 582, 590, 599, 607, 615, 623, 630, 640, 650, 664, 677, 687, 700];
+const PCUTS=[2, 4, 6, 8, 10, 12, 15, 17, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 78, 79, 81, 83, 85, 87, 88, 90, 92, 94, 96, 98, 100, 102, 104, 105, 106, 107, 108, 110, 112, 114, 116, 118, 119, 120, 121, 122, 123, 124, 126, 128, 130, 132, 134, 136, 138, 140, 142, 144, 146, 148, 150];
+
+const DAY=86400000;
+const WD=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const MO=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const num=(y,m,d)=>Math.round(Date.UTC(y,m-1,d)/DAY);
+const nowNum=()=>{const d=new Date();return num(d.getFullYear(),d.getMonth()+1,d.getDate())};
+const str=n=>{const d=new Date(n*DAY);return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0')};
+const parse=s=>{const a=s.split('-').map(Number);return num(a[0],a[1],a[2])};
+const sd=n=>{const d=new Date(n*DAY);return d.getUTCDate()+' '+MO[d.getUTCMonth()]};
+const label=n=>WD[new Date(n*DAY).getUTCDay()]+' '+sd(n);
+const START=num(2026,10,10);
+const XMAS=num(2027,1,6);
+const BUF=7;
+const DEUT=new Set([16,17,24,25,29]);
+const GROUPS=[['الأسفار التاريخية',5,18],['أسفار الحكمة والشعر',19,25],['الأنبياء',26,43]];
+const PSB=20;
+const CH=[];
+const PS=[];
+BOOKS.forEach((b,i)=>{if(i<5)return;for(let c=1;c<=b[1];c++){if(i===PSB)PS.push([i,c]);else CH.push([i,c])}});
+const ALL=CH.concat(PS);
+const VALID=new Set(ALL.map(x=>x[0]+':'+x[1]));
+const TOTAL=ALL.length;
+const NDAYS=CUTS.length;
+const DAYS=CUTS.map((e,k)=>({k,s:k?CUTS[k-1]:0,e,ps:k?PCUTS[k-1]:0,pe:PCUTS[k]}));
+const KEY='ot-plan-v1';
+let S={done:{},delays:[],t:0};
+let T=nowNum();
+let dates=[];
+let dset=new Set();
+let openDays=new Set();
+let cloud=null;
+let timer=0;
+let synced=false;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s);
+function clean(d){const o={};Object.keys(d||{}).forEach(k=>{if(VALID.has(k))o[k]=d[k]});return o}
+function loadLocal(){try{const r=JSON.parse(localStorage.getItem(KEY)||'null');if(r&&r.done)S={done:clean(r.done),delays:r.delays||[],t:r.t||0}}catch(e){}}
+function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function save(){
+  S.t=Date.now();
+  saveLocal();
+  if(!cloud)return;
+  clearTimeout(timer);
+  timer=setTimeout(async()=>{
+    try{await cloud.set({done:S.done,delays:S.delays,t:S.t});setSync(true)}catch(e){setSync(false)}
+  },600);
+}
+function setSync(ok){synced=ok;$('sync').textContent=ok?'محفوظ على حسابك':'محفوظ على الجهاز'}
+function schedule(){
+  dset=new Set(S.delays.map(parse));
+  dates=[];
+  let n=START;
+  while(dates.length<NDAYS){if(!dset.has(n))dates.push(n);n++}
+}
+const isDone=k=>!!S.done[k];
+const doneCount=()=>Object.keys(S.done).length;
+function dayKeys(d){const o=[];for(let i=d.ps;i<d.pe;i++)o.push(PS[i][0]+':'+PS[i][1]);for(let i=d.s;i<d.e;i++)o.push(CH[i][0]+':'+CH[i][1]);return o}
+function dayStats(d){const k=dayKeys(d);return{done:k.filter(isDone).length,total:k.length}}
+function bookStats(b){let c=0;for(let x=1;x<=BOOKS[b][1];x++){if(isDone(b+':'+x))c++}return c}
+function segs(d){
+  const out=[];
+  const add=a=>{
+    const b=a[0],c=a[1];
+    const last=out[out.length-1];
+    if(last&&last.b===b)last.cs.push(c);else out.push({b,cs:[c]});
+  };
+  for(let i=d.ps;i<d.pe;i++)add(PS[i]);
+  for(let i=d.s;i<d.e;i++)add(CH[i]);
+  return out;
+}
+function rangeText(d){
+  return segs(d).map(g=>{
+    const a=g.cs[0],z=g.cs[g.cs.length-1];
+    return BOOKS[g.b][0]+' '+(a===z?a:a+'–'+z);
+  }).join(' · ');
+}
+function chipsHTML(d){
+  return segs(d).map(g=>'<div class="seg"><div class="segname">'+BOOKS[g.b][0]+(DEUT.has(g.b)?'<i>قانوني ثاني</i>':'')+'</div><div class="chips">'+g.cs.map(c=>'<label class="chip"><input type="checkbox" data-key="'+g.b+':'+c+'" aria-label="'+BOOKS[g.b][0]+' '+c+'"><span>'+c+'</span></label>').join('')+'</div></div>').join('');
+}
+function listChipsHTML(idxs){
+  const out=[];
+  idxs.forEach(i=>{const b=ALL[i][0];const last=out[out.length-1];if(last&&last.b===b)last.cs.push(ALL[i][1]);else out.push({b,cs:[ALL[i][1]]})});
+  return out.map(g=>'<div class="seg"><div class="segname">'+BOOKS[g.b][0]+'</div><div class="chips">'+g.cs.map(c=>'<label class="chip"><input type="checkbox" data-key="'+g.b+':'+c+'" aria-label="'+BOOKS[g.b][0]+' '+c+'"><span>'+c+'</span></label>').join('')+'</div></div>').join('');
+}
+function currentK(){
+  if(dset.has(T))return -2;
+  if(T<dates[0])return -3;
+  const i=dates.indexOf(T);
+  if(i>=0)return i;
+  return -1;
+}
+function bufLeft(){return BUF-S.delays.length}
+function renderHero(){
+  const h=$('hero');
+  const k=currentK();
+  const all=doneCount()>=TOTAL;
+  let html='';
+  if(all){
+    html='<div class="finale"><p class="eyebrow">تمت الرحلة</p><h2>أتممت العهد القديم والأسفار القانونية الثانية</h2><p class="muted">850 إصحاحًا من يشوع إلى ملاخي، ومعاها المزامير كلها. المجد لله دائمًا.</p></div>';
+  }else if(k>=0){
+    const d=DAYS[k];
+    html='<p class="eyebrow">قراية النهارده · اليوم '+(k+1)+' من '+NDAYS+'</p><h2>'+label(T)+'</h2><p class="range">'+rangeText(d)+'</p>'+chipsHTML(d)+
+    '<div class="prog"><div class="bar-track"><div class="bar-fill" id="heroFill"></div></div><b id="heroProg"></b></div><p class="alert" id="behind" hidden></p>'+
+    '<div class="row"><button class="btn" data-act="all" data-k="'+k+'">علّم اليوم كله</button>'+bufBtn()+'</div>';
+  }else if(k===-2){
+    html='<p class="eyebrow">يوم احتياطي</p><h2>'+label(T)+'</h2><p class="muted">قراية النهارده اتأجلت للأيام الجاية والسلسلة محمية. لو قريت أي إصحاح النهارده هيتحسب برضه.</p><p class="alert" id="behind" hidden></p><div class="row"><button class="btn warn" data-act="undo">إلغاء الاحتياطي ورجوع الخطة</button></div>';
+  }else if(k===-3){
+    html='<p class="eyebrow">الرحلة بتبدأ قريب</p><h2>'+label(START)+'</h2><p class="range">اليوم الأول: '+rangeText(DAYS[0])+'</p><p class="muted">فاضل '+(START-T)+' يوم على البداية.</p>';
+  }else{
+    const un=[];
+    for(let i=0;i<TOTAL&&un.length<12;i++){if(!isDone(ALL[i][0]+':'+ALL[i][1]))un.push(i)}
+    html='<p class="eyebrow">آخر أسبوع</p><h2>كمّل اللي فاضل</h2><p class="range" id="lastTxt"></p>'+listChipsHTML(un)+'<p class="muted">دي أول إصحاحات لسه ما اتعلمتش، وبعد ما تخلصها هتظهر اللي بعدها.</p>';
+  }
+  h.innerHTML=html;
+}
+function bufBtn(){
+  const left=bufLeft();
+  return '<button class="btn warn" data-act="buffer"'+(left<=0?' disabled':'')+'>فعّل يوم احتياطي ('+Math.max(left,0)+' باقي)</button>';
+}
+function renderPlan(){
+  const root=$('plan');
+  let html='';
+  let wk=-1;
+  DAYS.forEach(d=>{
+    const w=Math.floor((dates[d.k]-START)/7);
+    if(w!==wk){
+      wk=w;
+      html+=(w>0?'</div>':'')+'<div class="week"><h4>الأسبوع '+(w+1)+'</h4>';
+    }
+    html+='<details class="day" id="day-'+d.k+'" data-k="'+d.k+'"'+(openDays.has(d.k)?' open':'')+'><summary><span class="seal">'+(d.k+1)+'</span><span class="dmeta"><b>'+label(dates[d.k])+'</b><small>'+rangeText(d)+'</small></span><span class="dside"><span class="badge"></span><span class="dp"></span></span></summary><div class="dbody">'+chipsHTML(d)+'<button class="btn ghost" data-act="all" data-k="'+d.k+'">علّم اليوم كله</button></div></details>';
+  });
+  html+='</div>';
+  const end=dates[NDAYS-1];
+  const bufStart=end+1;
+  html+='<div class="card bufcard" id="bufcard"><p class="eyebrow">أسبوع الاحتياطي</p><h2>'+(bufStart<=XMAS-1?sd(bufStart)+' إلى 5 يناير':'اتصرف بالكامل')+'</h2><p class="muted">كل ما تفعّل يوم احتياطي، الأيام الجاية كلها بتتزحزح يوم، وده بياخد من آخر أسبوع. السلسلة بتفضل محمية في اليوم ده.</p><div class="pips">';
+  for(let i=0;i<BUF;i++)html+='<span class="pip'+(i<S.delays.length?' used':'')+'">'+(i+1)+'</span>';
+  html+='</div>';
+  if(S.delays.length){
+    html+='<ul class="used-list">'+S.delays.slice().sort().map(s=>'<li><span>'+label(parse(s))+'</span><button data-act="rm" data-d="'+s+'">إلغاء</button></li>').join('')+'</ul>';
+  }
+  html+='<div class="row">'+(T>=START&&T<XMAS-1&&!dset.has(T)?bufBtn():'')+'</div></div>';
+  root.innerHTML=html;
+}
+function renderBooks(){
+  let html='';
+  GROUPS.forEach(g=>{
+    html+='<div class="group"><h3>'+g[0]+'</h3><div class="books">';
+    for(let b=g[1];b<=g[2];b++){
+      html+='<div class="book" id="book-'+b+'"><span class="stamp">تم</span><b>'+BOOKS[b][0]+(DEUT.has(b)?' <small>قانوني ثاني</small>':'')+'</b><small class="bc"></small><div class="bar-track"><div class="bar-fill"></div></div></div>';
+    }
+    html+='</div></div>';
+  });
+  $('booksPanel').innerHTML=html;
+}
+function render(){
+  T=nowNum();
+  schedule();
+  renderHero();
+  renderPlan();
+  refresh();
+}
+function streakInfo(){
+  const read=new Set(Object.values(S.done));
+  const frozen=new Set(S.delays);
+  const ts=str(T);
+  let n=T;
+  let atRisk=false;
+  if(!read.has(ts)){atRisk=!frozen.has(ts);n--}
+  let cur=0;
+  while(n>=START-1){
+    const s=str(n);
+    if(read.has(s))cur++;
+    else if(!frozen.has(s))break;
+    n--;
+  }
+  if(read.has(ts)&&cur===0)cur=0;
+  let best=0,run=0;
+  const first=[...read].sort()[0];
+  if(first){
+    for(let x=parse(first);x<=T;x++){
+      const s=str(x);
+      if(read.has(s)){run++;best=Math.max(best,run)}
+      else if(!frozen.has(s))run=0;
+    }
+  }
+  return{cur,best,atRisk,readToday:read.has(ts),frozenToday:frozen.has(ts)};
+}
+const MILES=[[3,'بداية الطريق'],[7,'أسبوع كامل'],[14,'أسبوعين'],[21,'3 أسابيع'],[30,'شهر كامل'],[50,'50 يومًا'],[81,'الرحلة كلها']];
+function refresh(){
+  T=nowNum();
+  const ts=str(T);
+  document.querySelectorAll('input[data-key]').forEach(i=>{i.checked=isDone(i.dataset.key)});
+  const dn=doneCount();
+  const readToday=Object.values(S.done).filter(v=>v===ts).length;
+  $('cToday').textContent=readToday;
+  $('cLeft').textContent=TOTAL-dn;
+  $('cDays').textContent=Math.max(XMAS-T,0);
+  const pct=Math.floor(dn/TOTAL*100);
+  $('pctTxt').textContent=pct+'%';
+  $('pctFill').style.width=(dn/TOTAL*100)+'%';
+  $('pctCnt').textContent=dn+' / '+TOTAL;
+  let behind=0;
+  DAYS.forEach(d=>{
+    const st=dayStats(d);
+    const el=$('day-'+d.k);
+    if(!el)return;
+    const done=st.done===st.total;
+    el.classList.toggle('done',done);
+    el.classList.toggle('today',!done&&dates[d.k]===T);
+    const late=!done&&dates[d.k]<T;
+    el.classList.toggle('late',late);
+    if(late)behind+=st.total-st.done;
+    el.querySelector('.badge').textContent=done?'تم':(dates[d.k]===T?'النهارده':(late?'متأخر':''));
+    el.querySelector('.dp').textContent=st.done+' / '+st.total;
+  });
+  const k=currentK();
+  if(k>=0){
+    const st=dayStats(DAYS[k]);
+    const hp=$('heroProg');
+    if(hp){hp.textContent='قريت '+st.done+' من '+st.total;$('heroFill').style.width=(st.done/st.total*100)+'%'}
+  }
+  const bh=$('behind');
+  if(bh){
+    bh.hidden=behind===0;
+    bh.textContent='عندك '+behind+' إصحاح متأخر من أيام فاتت. اقراهم لما تقدر، أو فعّل يوم احتياطي لو محتاج تزحزح الخطة.'
+  }
+  const lt=$('lastTxt');
+  if(lt)lt.textContent='فاضل '+(TOTAL-dn)+' إصحاح';
+  for(let b=0;b<BOOKS.length;b++){
+    const el=$('book-'+b);
+    if(!el)continue;
+    const c=bookStats(b);
+    const full=c===BOOKS[b][1];
+    el.classList.toggle('done',full);
+    el.querySelector('.bc').textContent=c+' / '+BOOKS[b][1]+' إصحاح';
+    el.querySelector('.bar-fill').style.width=(c/BOOKS[b][1]*100)+'%';
+  }
+  const si=streakInfo();
+  $('stNum').textContent=si.cur+(si.readToday?0:0);
+  $('streak').classList.toggle('on',si.cur>0||si.readToday);
+  const hrs=Math.max(1,Math.ceil((new Date(new Date().setHours(24,0,0,0))-new Date())/3600000));
+  let msg;
+  if(si.readToday)msg='السلسلة مشتعلة. كمّل بكرة عشان تكبر.';
+  else if(si.frozenToday)msg='النهارده يوم احتياطي، والسلسلة محمية.';
+  else if(si.cur>0)msg='اقرا إصحاح واحد على الأقل قبل آخر النهارده عشان السلسلة ما تنكسرش. باقي حوالي '+hrs+' ساعة.';
+  else msg='ابدأ سلسلتك النهارده بإصحاح واحد.';
+  msg+=' أطول سلسلة ليك: '+si.best+' يوم.';
+  $('stMsg').textContent=msg;
+  const read=new Set(Object.values(S.done));
+  const frozen=new Set(S.delays);
+  let w='';
+  for(let i=6;i>=0;i--){
+    const n=T-i;const s=str(n);
+    const cls=read.has(s)?'read':(frozen.has(s)?'frozen':'');
+    w+='<div class="dot '+cls+(i===0?' today':'')+'"><i></i><span>'+WD[new Date(n*DAY).getUTCDay()].replace('ال','')+'</span></div>';
+  }
+  $('week7').innerHTML=w;
+  const nx=MILES.find(m=>m[0]>si.cur)||MILES[MILES.length-1];
+  $('mileTxt').textContent='الهدف الجاي: '+nx[0]+' يوم، '+nx[1];
+  $('mileFill').style.width=Math.min(si.cur/nx[0]*100,100)+'%';
+}
+function toast(msg,kind){
+  const t=document.createElement('div');
+  t.className='toast '+(kind||'');
+  t.textContent=msg;
+  $('toasts').appendChild(t);
+  setTimeout(()=>t.remove(),3200);
+}
+function setKeys(keys,val){
+  const ts=str(nowNum());
+  const before=BOOKS.map((b,i)=>bookStats(i)===b[1]);
+  const wasAll=doneCount()>=TOTAL;
+  const stBefore=streakInfo();
+  keys.forEach(k=>{if(val){if(!S.done[k])S.done[k]=ts}else delete S.done[k]});
+  save();
+  const nowAll=doneCount()>=TOTAL;
+  if(nowAll!==wasAll)renderHero();
+  refresh();
+  BOOKS.forEach((b,i)=>{
+    const full=bookStats(i)===b[1];
+    if(full&&!before[i]){
+      toast('تم سفر '+b[0],'gold');
+      const s=document.querySelector('#book-'+i+' .stamp');
+      if(s){s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop')}
+    }
+  });
+  const stAfter=streakInfo();
+  if(val&&!stBefore.readToday&&stAfter.readToday)toast('السلسلة '+stAfter.cur+' يوم','green');
+  const k=currentK();
+  if(val&&k>=0){
+    const st=dayStats(DAYS[k]);
+    if(st.done===st.total&&keys.length)toast('خلصت قراية اليوم','green');
+  }
+}
+function useBuffer(){
+  const s=str(T);
+  if(S.delays.includes(s)||bufLeft()<=0||T<START||T>=XMAS-1)return;
+  S.delays.push(s);
+  save();
+  render();
+  toast('اتفعّل يوم احتياطي، الخطة اتزحزحت يوم');
+}
+function removeDelay(s){
+  S.delays=S.delays.filter(x=>x!==s);
+  save();
+  render();
+  toast('اتلغى الاحتياطي');
+}
+document.addEventListener('change',e=>{
+  const el=e.target;
+  if(el.matches&&el.matches('input[data-key]'))setKeys([el.dataset.key],el.checked);
+});
+document.addEventListener('toggle',e=>{
+  const el=e.target;
+  if(el.classList&&el.classList.contains('day')){
+    const k=+el.dataset.k;
+    if(el.open)openDays.add(k);else openDays.delete(k);
+  }
+},true);
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act],[data-tab]');
+  if(!b)return;
+  if(b.dataset.tab){
+    const t=b.dataset.tab;
+    document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',String(x===b)));
+    $('plan').hidden=t!=='plan';
+    $('booksPanel').hidden=t!=='books';
+    return;
+  }
+  const a=b.dataset.act;
+  if(a==='all'){
+    const d=DAYS[+b.dataset.k];
+    const keys=dayKeys(d);
+    const allDone=keys.every(isDone);
+    setKeys(keys,!allDone);
+  }else if(a==='buffer')useBuffer();
+  else if(a==='undo')removeDelay(str(T));
+  else if(a==='rm')removeDelay(b.dataset.d);
+  else if(a==='jump'){
+    document.querySelector('[data-tab="plan"]').click();
+    let k=currentK();
+    if(k<0){k=dates.findIndex(x=>x>=T);if(k<0)k=NDAYS-1}
+    const el=$('day-'+k);
+    if(el){el.open=true;el.scrollIntoView({behavior:'smooth',block:'center'})}
+  }
+});
+loadLocal();
+renderBooks();
+{
+  const k0=(()=>{schedule();return currentK()})();
+  if(k0>=0)openDays.add(k0);
+}
+render();
+setInterval(()=>{if(nowNum()!==T)render();else refresh()},60000);
+(async()=>{
+  try{
+    if(!window.claude||!claude.use)return;
+    const user=await claude.use('user');
+    const db=await claude.use('db');
+    if(!user||!db)return;
+    const id=await user.id();
+    if(!id)return;
+    cloud=db.doc('data/users/'+id+'/progress');
+    cloud.onSnapshot(snap=>{
+      if(!snap.exists){
+        if(S.t||doneCount()||S.delays.length){save()}
+        else setSync(true);
+        return;
+      }
+      const r=snap.data()||{};
+      setSync(true);
+      if((r.t||0)>S.t){
+        const delaysChanged=JSON.stringify(r.delays||[])!==JSON.stringify(S.delays);
+        S={done:clean(r.done),delays:r.delays||[],t:r.t||0};
+        saveLocal();
+        if(delaysChanged)render();else{renderHero();refresh()}
+      }else if((r.t||0)<S.t){
+        save();
+      }
+    },()=>setSync(false));
+  }catch(e){}
+})();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
+</script>
+
+</body></html>
