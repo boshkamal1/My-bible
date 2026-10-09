@@ -146,6 +146,30 @@ h2{font-family:var(--f-display);font-weight:700;font-size:1.65rem;line-height:1.
 @keyframes rise{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (max-width:480px){body{font-size:17px}.card{padding:18px 16px}.streak{grid-template-columns:1fr}.flame{grid-row:auto;flex-direction:row;gap:12px;justify-content:center}.day summary{gap:10px;padding:10px}.dside{font-size:.72rem}}
+
+:root{--bg:#efe3c4;--paper:#fbf4e1;--paper2:#f3e6c4;--line:#d8c48f;--gold:#a8741f;--gold-soft:#ead9a6;--vel:#1d3160;--vel2:#142248;--gilt:#e2bb5e}
+body{background-color:var(--bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .32 0 0 0 0 .1 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),radial-gradient(ellipse at 50% 0%,#f8efd5 0,transparent 55%),radial-gradient(circle at 100% 100%,#e3d3a6 0,transparent 45%)}
+.card{background:linear-gradient(180deg,var(--paper),#f7ecd0);border:1px solid var(--gold);border-radius:3px;box-shadow:inset 0 0 0 4px var(--paper),inset 0 0 0 5px var(--gilt),0 6px 18px rgba(90,60,10,.12)}
+.chip span{border-radius:4px;border-color:var(--gold);background:var(--paper)}
+.day,.book{border-color:var(--line);background:var(--paper)}
+.day.done,.book.done{background:var(--green-soft)}
+.top svg{width:64px;height:64px;border-radius:16px;box-shadow:0 4px 14px rgba(29,49,96,.3)}
+h1{text-shadow:0 1px 0 rgba(226,187,94,.55)}
+.chiprow{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap}
+.mute{font-family:var(--f-label);font-size:.78rem;color:var(--vel);background:var(--paper);border:1px solid var(--gold);border-radius:99px;padding:2px 12px}
+.mute[aria-pressed="true"]{color:var(--rubric);border-color:var(--rubric)}
+.verse{position:relative;text-align:center;color:#f6ecd0;background:radial-gradient(ellipse at 50% 0%,#2b4585 0,var(--vel) 55%,var(--vel2) 100%);border:1px solid var(--gilt);border-radius:3px;padding:30px 24px 26px;box-shadow:inset 0 0 0 6px var(--vel),inset 0 0 0 7px var(--gilt),inset 0 0 0 11px var(--vel),inset 0 0 0 12px rgba(226,187,94,.45),0 14px 34px rgba(29,49,96,.32);display:flex;flex-direction:column;align-items:center;gap:12px}
+.verse .star{width:42px;height:36px}
+.verse .vh{font-family:var(--f-label);font-weight:600;font-size:.95rem;color:var(--gilt);margin:0}
+.verse .vt{font-family:var(--f-display);font-weight:400;font-size:clamp(1.5rem,5.4vw,2.05rem);line-height:2;margin:0;max-width:30em;text-wrap:balance;color:#fbf3da}
+.vref{display:flex;align-items:center;gap:12px;font-family:var(--f-label);color:var(--gilt);font-size:1.02rem}
+.vref i{display:block;width:44px;height:1px;background:linear-gradient(90deg,transparent,var(--gilt))}
+.vref i:last-child{transform:scaleX(-1)}
+.verse .vm{margin:0;font-size:.9rem;color:#c3cfee}
+.hero.glow{animation:glow 1.7s ease-out}
+.book .bk{align-self:flex-start;padding:4px 12px;font-size:.8rem;margin-top:2px}
+@keyframes glow{0%{filter:drop-shadow(0 0 0 rgba(226,187,94,0))}35%{filter:drop-shadow(0 0 20px rgba(226,187,94,.95))}100%{filter:none}}
+@media (max-width:480px){.verse{padding:26px 16px 22px}}
 </style>
 <div class="wrap" dir="rtl" lang="ar">
   <header class="top"><svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#2c4a82"/><path d="M256 200C222 172 172 166 116 180V348C172 336 222 342 256 372Z" fill="#fffdf7"/><path d="M256 200C290 172 340 166 396 180V348C340 336 290 342 256 372Z" fill="#fffdf7"/><path d="M256 198V374" stroke="#b0802a" stroke-width="8"/><path d="M116 360L256 388L396 360V372L256 400L116 372Z" fill="#b0802a"/><path d="M256 76L264 106L294 94L282 120L312 120L286 134L304 160L274 148L256 164L238 148L208 160L226 134L200 120L230 120L218 94L248 106Z" fill="#d6a74a"/></svg>
@@ -153,8 +177,9 @@ h2{font-family:var(--f-display);font-weight:700;font-size:1.65rem;line-height:1.
     <p class="sub">العهد القديم والأسفار القانونية الثانية بدون أسفار موسى، 850 إصحاحًا والمزامير موزعة على كل الأيام</p>
     <div class="orn"><i></i></div>
     <p class="sub">من السبت 10 أكتوبر حتى الثلاثاء 29 ديسمبر، وأسبوع احتياطي لحد 5 يناير، وعيد الميلاد 6 يناير</p>
-    <span class="sync" id="sync">محفوظ على الجهاز</span>
+    <div class="chiprow"><span class="sync" id="sync">محفوظ على الجهاز</span><button class="mute" id="mute" type="button" aria-pressed="false"></button></div>
   </header>
+  <section class="verse" id="verse" aria-live="polite"><svg class="star" viewBox="190 60 140 120" aria-hidden="true"><path d="M256 76L264 106L294 94L282 120L312 120L286 134L304 160L274 148L256 164L238 148L208 160L226 134L200 120L230 120L218 94L248 106Z" fill="#e2bb5e"/></svg><p class="vh">آية اليوم</p><p class="vt" id="vText"></p><div class="vref"><i></i><b id="vRef"></b><i></i></div><p class="vm" id="vNote"></p></section>
   <section class="card hero" id="hero" aria-live="polite"></section>
   <section class="card streak" id="streak">
     <div class="flame">
@@ -340,7 +365,7 @@ function renderBooks(){
   GROUPS.forEach(g=>{
     html+='<div class="group"><h3>'+g[0]+'</h3><div class="books">';
     for(let b=g[1];b<=g[2];b++){
-      html+='<div class="book" id="book-'+b+'"><span class="stamp">تم</span><b>'+BOOKS[b][0]+(DEUT.has(b)?' <small>قانوني ثاني</small>':'')+'</b><small class="bc"></small><div class="bar-track"><div class="bar-fill"></div></div></div>';
+      html+='<div class="book" id="book-'+b+'"><span class="stamp">تم</span><b>'+BOOKS[b][0]+(DEUT.has(b)?' <small>قانوني ثاني</small>':'')+'</b><small class="bc"></small><div class="bar-track"><div class="bar-fill"></div></div><button class="btn ghost bk" data-act="book" data-b="'+b+'"></button></div>';
     }
     html+='</div></div>';
   });
@@ -351,6 +376,7 @@ function render(){
   schedule();
   renderHero();
   renderPlan();
+  renderVerse();
   refresh();
 }
 function streakInfo(){
@@ -428,6 +454,8 @@ function refresh(){
     el.classList.toggle('done',full);
     el.querySelector('.bc').textContent=c+' / '+BOOKS[b][1]+' إصحاح';
     el.querySelector('.bar-fill').style.width=(c/BOOKS[b][1]*100)+'%';
+    const bb=el.querySelector('.bk');
+    if(bb)bb.textContent=full?'إلغاء تعليم السفر':'علّم السفر كله';
   }
   const si=streakInfo();
   $('stNum').textContent=si.cur+(si.readToday?0:0);
@@ -465,6 +493,9 @@ function setKeys(keys,val){
   const before=BOOKS.map((b,i)=>bookStats(i)===b[1]);
   const wasAll=doneCount()>=TOTAL;
   const stBefore=streakInfo();
+  const k0=currentK();
+  const dsb=k0>=0?dayStats(DAYS[k0]):null;
+  const wasDayDone=!!dsb&&dsb.done===dsb.total;
   keys.forEach(k=>{if(val){if(!S.done[k])S.done[k]=ts}else delete S.done[k]});
   save();
   const nowAll=doneCount()>=TOTAL;
@@ -474,6 +505,7 @@ function setKeys(keys,val){
     const full=bookStats(i)===b[1];
     if(full&&!before[i]){
       toast('تم سفر '+b[0],'gold');
+      buzz([18]);
       const s=document.querySelector('#book-'+i+' .stamp');
       if(s){s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop')}
     }
@@ -483,7 +515,7 @@ function setKeys(keys,val){
   const k=currentK();
   if(val&&k>=0){
     const st=dayStats(DAYS[k]);
-    if(st.done===st.total&&keys.length)toast('خلصت قراية اليوم','green');
+    if(st.done===st.total&&keys.length&&!wasDayDone){toast('خلصت قراية اليوم','green');celebrate()}
   }
 }
 function useBuffer(){
@@ -530,6 +562,14 @@ document.addEventListener('click',e=>{
   }else if(a==='buffer')useBuffer();
   else if(a==='undo')removeDelay(str(T));
   else if(a==='rm')removeDelay(b.dataset.d);
+  else if(a==='book'){
+    const bi=+b.dataset.b;
+    const keys=[];
+    for(let x=1;x<=BOOKS[bi][1];x++)keys.push(bi+':'+x);
+    if(keys.every(isDone)){
+      if(confirm('تلغي تعليم سفر '+BOOKS[bi][0]+' كله؟'))setKeys(keys,false);
+    }else setKeys(keys,true);
+  }
   else if(a==='jump'){
     document.querySelector('[data-tab="plan"]').click();
     let k=currentK();
@@ -538,6 +578,116 @@ document.addEventListener('click',e=>{
     if(el){el.open=true;el.scrollIntoView({behavior:'smooth',block:'center'})}
   }
 });
+
+const VERSES=[
+[5,1,'9','أَمَا أَمَرْتُكَ؟ تَشَدَّدْ وَتَشَجَّعْ. لاَ تَرْهَبْ وَلاَ تَرْتَعِبْ لأَنَّ الرَّبَّ إِلهَكَ مَعَكَ حَيْثُمَا تَذْهَبُ.'],
+[5,24,'15','أَمَّا أَنَا وَبَيْتِي فَنَعْبُدُ الرَّبَّ.'],
+[7,1,'16','حَيْثُمَا ذَهَبْتِ أَذْهَبُ وَحَيْثُمَا بِتِّ أَبِيتُ. شَعْبُكِ شَعْبِي وَإِلهُكِ إِلهِي.'],
+[8,16,'7','لأَنَّهُ لَيْسَ كَمَا يَنْظُرُ الإِنْسَانُ. لأَنَّ الإِنْسَانَ يَنْظُرُ إِلَى العَيْنَيْنِ وَأَمَّا الرَّبُّ فَإِنَّهُ يَنْظُرُ إِلَى القَلْبِ.'],
+[12,16,'34','احْمَدُوا الرَّبَّ لأَنَّهُ صَالِحٌ لأَنَّ إِلَى الأَبَدِ رَحْمَتَهُ.'],
+[15,8,'10','فَرَحُ الرَّبِّ هُوَ قُوَّتُكُمْ.'],
+[19,19,'25','أَمَّا أَنَا فَقَدْ عَلِمْتُ أَنَّ وَلِيِّي حَيٌّ وَالآخِرَ عَلَى الأَرْضِ يَقُومُ.'],
+[20,23,'1','الرَّبُّ رَاعِيَّ فَلاَ يُعْوِزُنِي شَيْءٌ.'],
+[20,27,'1','الرَّبُّ نُورِي وَخَلاَصِي، مِمَّنْ أَخَافُ؟ الرَّبُّ حِصْنُ حَيَاتِي، مِمَّنْ أَرْتَعِبُ؟'],
+[20,34,'8','ذُوقُوا وَانْظُرُوا مَا أَطْيَبَ الرَّبَّ. طُوبَى لِلرَّجُلِ الْمُتَوَكِّلِ عَلَيْهِ.'],
+[20,46,'10','كُفُّوا وَاعْلَمُوا أَنِّي أَنَا اللهُ.'],
+[20,91,'1','الْجَالِسُ فِي سِتْرِ الْعَلِيِّ فِي ظِلِّ الْقَدِيرِ يَبِيتُ.'],
+[20,103,'2','بَارِكِي يَا نَفْسِي الرَّبَّ وَلاَ تَنْسَيْ كُلَّ حَسَنَاتِهِ.'],
+[20,119,'105','سِرَاجٌ لِرِجْلِي كَلاَمُكَ وَنُورٌ لِسَبِيلِي.'],
+[20,121,'1-2','أَرْفَعُ عَيْنَيَّ إِلَى الْجِبَالِ مِنْ حَيْثُ يَأْتِي عَوْنِي. مَعُونَتِي مِنْ عِنْدِ الرَّبِّ صَانِعِ السَّمَاوَاتِ وَالأَرْضِ.'],
+[21,3,'5-6','تَوَكَّلْ عَلَى الرَّبِّ بِكُلِّ قَلْبِكَ، وَعَلَى فَهْمِكَ لاَ تَعْتَمِدْ. فِي كُلِّ طُرُقِكَ اعْرِفْهُ وَهُوَ يُقَوِّمُ سُبُلَكَ.'],
+[21,16,'3','سَلِّمْ لِلرَّبِّ أَعْمَالَكَ فَتَثْبُتَ أَفْكَارُكَ.'],
+[22,3,'1','لِكُلِّ شَيْءٍ زَمَانٌ، وَلِكُلِّ أَمْرٍ تَحْتَ السَّمَاوَاتِ وَقْتٌ.'],
+[22,12,'1','وَاذْكُرْ خَالِقَكَ فِي أَيَّامِ شَبَابِكَ.'],
+[26,9,'6','لأَنَّهُ يُولَدُ لَنَا وَلَدٌ وَنُعْطَى ابْنًا وَتَكُونُ الرِّئَاسَةُ عَلَى كَتِفِهِ وَيُدْعَى اسْمُهُ عَجِيبًا مُشِيرًا إِلهًا قَدِيرًا أَبًا أَبَدِيًّا رَئِيسَ السَّلاَمِ.'],
+[26,40,'31','وَأَمَّا مُنْتَظِرُو الرَّبِّ فَيُجَدِّدُونَ قُوَّةً. يَرْفَعُونَ أَجْنِحَةً كَالنُّسُورِ. يَرْكُضُونَ وَلاَ يَتْعَبُونَ. يَمْشُونَ وَلاَ يُعْيُونَ.'],
+[26,41,'10','لاَ تَخَفْ لأَنِّي مَعَكَ. لاَ تَتَلَفَّتْ لأَنِّي إِلهُكَ. قَدْ أَيَّدْتُكَ وَأَعَنْتُكَ وَعَضَدْتُكَ بِيَمِينِ بِرِّي.'],
+[26,53,'5','وَهُوَ مَجْرُوحٌ لأَجْلِ مَعَاصِينَا مَسْحُوقٌ لأَجْلِ آثَامِنَا. تَأْدِيبُ سَلاَمِنَا عَلَيْهِ وَبِحُبُرِهِ شُفِينَا.'],
+[27,29,'11','لأَنِّي عَرَفْتُ الأَفْكَارَ الَّتِي أَنَا مُفْتَكِرٌ بِهَا عَنْكُمْ، يَقُولُ الرَّبُّ، أَفْكَارَ سَلاَمٍ لاَ شَرٍّ، لأُعْطِيَكُمْ آخِرَةً وَرَجَاءً.'],
+[28,3,'22-23','إِنَّ إِحْسَانَاتِ الرَّبِّ لاَ تَنْتَهِي، إِنَّ مَرَاحِمَهُ لاَ تَزُولُ. هِيَ جَدِيدَةٌ فِي كُلِّ صَبَاحٍ. كَثِيرَةٌ أَمَانَتُكَ.'],
+[30,36,'26','وَأُعْطِيكُمْ قَلْبًا جَدِيدًا، وَأَجْعَلُ رُوحًا جَدِيدَةً فِي دَاخِلِكُمْ، وَأَنْزِعُ قَلْبَ الْحَجَرِ مِنْ لَحْمِكُمْ وَأُعْطِيكُمْ قَلْبَ لَحْمٍ.'],
+[32,6,'6','إِنِّي أُرِيدُ رَحْمَةً لاَ ذَبِيحَةً، وَمَعْرِفَةَ اللهِ أَكْثَرَ مِنْ مُحْرَقَاتٍ.'],
+[34,5,'24','وَلْيَجْرِ الْحَقُّ كَالْمِيَاهِ وَالْبِرُّ كَنَهْرٍ دَائِمٍ.'],
+[37,6,'8','قَدْ أَخْبَرَكَ أَيُّهَا الإِنْسَانُ مَا هُوَ صَالِحٌ وَمَاذَا يَطْلُبُهُ مِنْكَ الرَّبُّ، إِلاَّ أَنْ تَصْنَعَ الْحَقَّ وَتُحِبَّ الرَّحْمَةَ وَتَسْلُكَ مُتَوَاضِعًا مَعَ إِلهِكَ.'],
+[38,1,'7','صَالِحٌ هُوَ الرَّبُّ حِصْنٌ فِي يَوْمِ الضِّيقِ، وَهُوَ يَعْرِفُ الْمُتَوَكِّلِينَ عَلَيْهِ.'],
+[39,3,'18','فَإِنِّي أَبْتَهِجُ بِالرَّبِّ وَأَفْرَحُ بِإِلهِ خَلاَصِي.'],
+[42,4,'6','لاَ بِالْقُدْرَةِ وَلاَ بِالْقُوَّةِ بَلْ بِرُوحِي، قَالَ رَبُّ الْجُنُودِ.'],
+[43,4,'2','وَلَكُمْ أَيُّهَا الْمُتَّقُونَ اسْمِي تُشْرِقُ شَمْسُ الْبِرِّ وَالشِّفَاءُ فِي أَجْنِحَتِهَا.']
+];
+function renderVerse(){
+  const k=currentK();
+  let pick=null,level=0,seed;
+  if(k>=0){
+    const keys=new Set(dayKeys(DAYS[k]));
+    const books=new Set(segs(DAYS[k]).map(g=>g.b));
+    let pool=VERSES.filter(v=>keys.has(v[0]+':'+v[1]));
+    level=2;
+    if(!pool.length){pool=VERSES.filter(v=>books.has(v[0]));level=1}
+    if(pool.length)pick=pool[k%pool.length];
+    seed=k;
+  }else seed=Math.max(T-START,0);
+  if(!pick){pick=VERSES[seed%VERSES.length];level=0}
+  $('vText').textContent=pick[3];
+  $('vRef').textContent=BOOKS[pick[0]][0]+' '+pick[1]+':'+pick[2];
+  $('vNote').textContent=level===2?'من قراية النهارده':(level===1?'من سفر النهارده':'');
+  $('vNote').hidden=level===0;
+}
+let muted=false;
+try{muted=localStorage.getItem('ot-mute')==='1'}catch(e){}
+let AC=null;
+function actx(){
+  if(!AC){const C=window.AudioContext||window.webkitAudioContext;if(C)AC=new C()}
+  return AC;
+}
+function bell(){
+  if(muted)return;
+  const a=actx();
+  if(!a)return;
+  if(a.state==='suspended')a.resume();
+  const t0=a.currentTime;
+  const out=a.createGain();
+  out.gain.value=0.2;
+  out.connect(a.destination);
+  [[659.25,0],[987.77,0.42]].forEach(n=>{
+    [[1,1],[2.76,.32],[5.4,.12]].forEach(p=>{
+      const o=a.createOscillator();
+      const g=a.createGain();
+      const t=t0+n[1];
+      o.type='sine';
+      o.frequency.value=n[0]*p[0];
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.exponentialRampToValueAtTime(p[1],t+0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+2.4/p[0]**0.5);
+      o.connect(g);
+      g.connect(out);
+      o.start(t);
+      o.stop(t+2.6);
+    });
+  });
+}
+function buzz(p){
+  if(muted)return;
+  try{if(navigator.vibrate)navigator.vibrate(p)}catch(e){}
+}
+function celebrate(){
+  bell();
+  buzz([40,60,40,60,140]);
+  const hero=$('hero');
+  if(hero){hero.classList.remove('glow');void hero.offsetWidth;hero.classList.add('glow')}
+}
+function paintMute(){
+  const b=$('mute');
+  b.textContent=muted?'الجرس والاهتزاز: مكتوم':'الجرس والاهتزاز: شغال';
+  b.setAttribute('aria-pressed',String(muted));
+}
+$('mute').addEventListener('click',()=>{
+  muted=!muted;
+  try{localStorage.setItem('ot-mute',muted?'1':'0')}catch(e){}
+  paintMute();
+  if(!muted)bell();
+});
+document.addEventListener('pointerdown',()=>{const a=actx();if(a&&a.state==='suspended')a.resume()},{once:true});
+paintMute();
 loadLocal();
 renderBooks();
 {
