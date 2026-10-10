@@ -300,9 +300,35 @@ function buildPlan(){
   INPLAN=new Set(ALL.map(x=>x[0]+':'+x[1]));
   TOTAL=ALL.length;
   NDAYS=TOTAL?lastDay(START)-START+1:0;
-  const cc=cutsFor(CH.map(x=>0.3*28.4+0.7*VCOUNT[x[0]]/BOOKS[x[0]][1]),NDAYS);
-  const pc=cutsFor(PS.map(x=>PSW[x[1]]||1),NDAYS);
-  DAYS=cc.map((e,k)=>({k,s:k?cc[k-1]:0,e,ps:k?pc[k-1]:0,pe:pc[k]}));
+  DAYS=[];
+}
+let ADJ={left:0,days:0,per:0};
+const cw=x=>0.3*28.4+0.7*VCOUNT[x[0]]/BOOKS[x[0]][1];
+function layout(){
+  const ts=str(T);
+  let kT=dates.findIndex(x=>x>=T);
+  if(kT<0)kT=NDAYS;
+  const dstr=dates.map(str);
+  const past=[];
+  for(let k=0;k<kT;k++)past.push({k,ks:[]});
+  const poolC=[],poolP=[];
+  const handle=(pair,pool)=>{
+    const v=S.done[pair[0]+':'+pair[1]];
+    if(v&&v<ts&&kT>0){
+      let j=0;
+      for(let x=0;x<kT;x++){if(dstr[x]<=v)j=x}
+      past[j].ks.push(pair);
+    }else if(!(v&&v<ts))pool.push(pair);
+  };
+  PS.forEach(x=>handle(x,poolP));
+  CH.forEach(x=>handle(x,poolC));
+  const n=NDAYS-kT;
+  const cc=cutsFor(poolC.map(cw),n);
+  const pc=cutsFor(poolP.map(x=>PSW[x[1]]||1),n);
+  DAYS=past;
+  for(let i=0;i<n;i++)DAYS.push({k:kT+i,ks:poolP.slice(i?pc[i-1]:0,pc[i]).concat(poolC.slice(i?cc[i-1]:0,cc[i]))});
+  const left=poolC.length+poolP.length;
+  ADJ={left,days:n,per:n?left/n:0};
 }
 const KEY='ot-plan-v1';
 let S={done:{},delays:[],t:0,setup:null};
@@ -336,7 +362,7 @@ function schedule(){
 }
 const isDone=k=>!!S.done[k];
 const doneCount=()=>{let c=0;for(const k in S.done)if(INPLAN.has(k))c++;return c};
-function dayKeys(d){const o=[];for(let i=d.ps;i<d.pe;i++)o.push(PS[i][0]+':'+PS[i][1]);for(let i=d.s;i<d.e;i++)o.push(CH[i][0]+':'+CH[i][1]);return o}
+function dayKeys(d){return d.ks.map(x=>x[0]+':'+x[1])}
 function dayStats(d){const k=dayKeys(d);return{done:k.filter(isDone).length,total:k.length}}
 function bookStats(b){const p=PRE[b]||0;let c=p;for(let x=p+1;x<=BOOKS[b][1];x++){if(isDone(b+':'+x))c++}return c}
 function segs(d){
@@ -346,8 +372,7 @@ function segs(d){
     const last=out[out.length-1];
     if(last&&last.b===b)last.cs.push(c);else out.push({b,cs:[c]});
   };
-  for(let i=d.ps;i<d.pe;i++)add(PS[i]);
-  for(let i=d.s;i<d.e;i++)add(CH[i]);
+  d.ks.forEach(add);
   return out;
 }
 function rangeText(d){
@@ -409,7 +434,7 @@ function renderPlan(){
       wk=w;
       html+=(w>0?'</div>':'')+'<div class="week"><h4>الأسبوع '+(w+1)+'</h4>';
     }
-    html+='<details class="day" id="day-'+d.k+'" data-k="'+d.k+'"'+(openDays.has(d.k)?' open':'')+'><summary><span class="seal">'+(d.k+1)+'</span><span class="dmeta"><b>'+label(dates[d.k])+'</b><small>'+rangeText(d)+'</small></span><span class="dside"><span class="badge"></span><span class="dp"></span></span></summary><div class="dbody">'+chipsHTML(d)+'<button class="btn ghost" data-act="all" data-k="'+d.k+'">علّم اليوم كله</button></div></details>';
+    html+='<details class="day" id="day-'+d.k+'" data-k="'+d.k+'"'+(openDays.has(d.k)?' open':'')+'><summary><span class="seal">'+(d.k+1)+'</span><span class="dmeta"><b>'+label(dates[d.k])+'</b><small>'+(rangeText(d)||'ما اتقراش حاجة')+'</small></span><span class="dside"><span class="badge"></span><span class="dp"></span></span></summary><div class="dbody">'+chipsHTML(d)+'<button class="btn ghost" data-act="all" data-k="'+d.k+'">علّم اليوم كله</button></div></details>';
   });
   html+='</div>';
   const end=dates[NDAYS-1];
@@ -437,6 +462,7 @@ function renderBooks(){
 function render(){
   T=nowNum();
   schedule();
+  layout();
   renderHeader();
   renderHero();
   renderPlan();
@@ -484,30 +510,29 @@ function refresh(){
   $('pctTxt').textContent=pct+'%';
   $('pctFill').style.width=(TOTAL?dn/TOTAL*100:100)+'%';
   $('pctCnt').textContent=dn+' / '+TOTAL;
-  let behind=0;
   DAYS.forEach(d=>{
     const st=dayStats(d);
     const el=$('day-'+d.k);
     if(!el)return;
-    const done=st.done===st.total;
+    const done=st.total>0&&st.done===st.total;
+    const gone=dates[d.k]<T;
     el.classList.toggle('done',done);
     el.classList.toggle('today',!done&&dates[d.k]===T);
-    const late=!done&&dates[d.k]<T;
-    el.classList.toggle('late',late);
-    if(late)behind+=st.total-st.done;
-    el.querySelector('.badge').textContent=done?'تم':(dates[d.k]===T?'النهارده':(late?'متأخر':''));
+    el.classList.toggle('late',false);
+    el.querySelector('.badge').textContent=done?'تم':(dates[d.k]===T?'النهارده':(gone?'فات':''));
     el.querySelector('.dp').textContent=st.done+' / '+st.total;
   });
   const k=currentK();
   if(k>=0){
     const st=dayStats(DAYS[k]);
     const hp=$('heroProg');
-    if(hp){hp.textContent='قريت '+st.done+' من '+st.total;$('heroFill').style.width=(st.done/st.total*100)+'%'}
+    if(hp){hp.textContent='قريت '+st.done+' من '+st.total;$('heroFill').style.width=(st.total?st.done/st.total*100:100)+'%'}
   }
   const bh=$('behind');
   if(bh){
-    bh.hidden=behind===0;
-    bh.textContent='عندك '+behind+' إصحاح متأخر من أيام فاتت. اقراهم لما تقدر، أو فعّل يوم احتياطي لو محتاج تزحزح الخطة.'
+    const base=NDAYS?TOTAL/NDAYS:0;
+    bh.hidden=!(ADJ.days&&ADJ.per>base*1.01);
+    bh.textContent='الخطة اتعدلت: فاضل '+ADJ.left+' إصحاح ومزمور على '+ADJ.days+' يوم، يعني حوالي '+(Math.round(ADJ.per*10)/10)+' في اليوم.'
   }
   const lt=$('lastTxt');
   if(lt)lt.textContent='فاضل '+(TOTAL-dn)+' إصحاح';
