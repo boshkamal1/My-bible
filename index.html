@@ -322,13 +322,33 @@ function layout(){
   };
   PS.forEach(x=>handle(x,poolP));
   CH.forEach(x=>handle(x,poolC));
-  const n=NDAYS-kT;
-  const cc=cutsFor(poolC.map(cw),n);
-  const pc=cutsFor(poolP.map(x=>PSW[x[1]]||1),n);
   DAYS=past;
-  for(let i=0;i<n;i++)DAYS.push({k:kT+i,ks:poolP.slice(i?pc[i-1]:0,pc[i]).concat(poolC.slice(i?cc[i-1]:0,cc[i]))});
-  const left=poolC.length+poolP.length;
+  const n=NDAYS-kT;
+  const pend=x=>!S.done[x[0]+':'+x[1]];
+  const left=poolC.filter(pend).length+poolP.filter(pend).length;
+  if(n>0){
+    const cc=cutsFor(poolC.map(cw),n);
+    const pc=cutsFor(poolP.map(x=>PSW[x[1]]||1),n);
+    DAYS.push({k:kT,ks:poolP.slice(0,pc[0]).concat(poolC.slice(0,cc[0]))});
+    const fc=poolC.slice(cc[0]).filter(pend);
+    const fp=poolP.slice(pc[0]).filter(pend);
+    const m=n-1;
+    const c2=cutsFor(fc.map(cw),m);
+    const p2=cutsFor(fp.map(x=>PSW[x[1]]||1),m);
+    for(let i=0;i<m;i++)DAYS.push({k:kT+1+i,ks:fp.slice(i?p2[i-1]:0,p2[i]).concat(fc.slice(i?c2[i-1]:0,c2[i]))});
+  }
   ADJ={left,days:n,per:n?left/n:0};
+}
+const planSig=()=>DAYS.map(d=>d.ks.length+':'+(d.ks[0]||[]).join('.')+':'+(d.ks[d.ks.length-1]||[]).join('.')).join('|');
+let rpTimer=0;
+function scheduleReplan(){clearTimeout(rpTimer);rpTimer=setTimeout(replan,1200)}
+function replan(){
+  const before=planSig();
+  layout();
+  if(planSig()===before){refresh();return}
+  renderPlan();
+  refresh();
+  toast('الخطة اتعدلت على باقي الأيام','gold');
 }
 const KEY='ot-plan-v1';
 let S={done:{},delays:[],t:0,setup:null};
@@ -590,6 +610,7 @@ function setKeys(keys,val){
   const wasDayDone=!!dsb&&dsb.done===dsb.total;
   keys.forEach(k=>{if(val){if(!S.done[k])S.done[k]=ts}else delete S.done[k]});
   save();
+  {const tk0=currentK();const tks=tk0>=0&&DAYS[tk0]?new Set(dayKeys(DAYS[tk0])):new Set();if(keys.some(x=>!tks.has(x)))scheduleReplan()}
   const nowAll=doneCount()>=TOTAL;
   if(nowAll!==wasAll)renderHero();
   refresh();
