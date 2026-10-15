@@ -303,6 +303,7 @@ function buildPlan(){
   DAYS=[];
 }
 let ADJ={left:0,days:0,per:0};
+let T0=new Set(),AHEAD=0;
 const cw=x=>0.3*28.4+0.7*VCOUNT[x[0]]/BOOKS[x[0]][1];
 function layout(){
   const ts=str(T);
@@ -323,13 +324,21 @@ function layout(){
   PS.forEach(x=>handle(x,poolP));
   CH.forEach(x=>handle(x,poolC));
   DAYS=past;
+  T0=new Set();
+  AHEAD=0;
   const n=NDAYS-kT;
   const pend=x=>!S.done[x[0]+':'+x[1]];
   const left=poolC.filter(pend).length+poolP.filter(pend).length;
   if(n>0){
     const cc=cutsFor(poolC.map(cw),n);
     const pc=cutsFor(poolP.map(x=>PSW[x[1]]||1),n);
-    DAYS.push({k:kT,ks:poolP.slice(0,pc[0]).concat(poolC.slice(0,cc[0]))});
+    const t0=poolP.slice(0,pc[0]).concat(poolC.slice(0,cc[0]));
+    T0=new Set(t0.map(x=>x[0]+':'+x[1]));
+    const doneT=x=>S.done[x[0]+':'+x[1]]===ts;
+    const ap=poolP.slice(pc[0]).filter(doneT);
+    const ac=poolC.slice(cc[0]).filter(doneT);
+    AHEAD=ap.length+ac.length;
+    DAYS.push({k:kT,ks:poolP.slice(0,pc[0]).concat(ap,poolC.slice(0,cc[0]),ac)});
     const fc=poolC.slice(cc[0]).filter(pend);
     const fp=poolP.slice(pc[0]).filter(pend);
     const m=n-1;
@@ -346,9 +355,10 @@ function replan(){
   const before=planSig();
   layout();
   if(planSig()===before){refresh();return}
+  renderHero();
   renderPlan();
   refresh();
-  toast('الخطة اتعدلت على باقي الأيام','gold');
+  toast(AHEAD>0?'اللي قريته من الأيام الجاية اتضاف لقراية النهارده':'الخطة اتعدلت على باقي الأيام','gold');
 }
 const KEY='ot-plan-v1';
 let S={done:{},delays:[],t:0,setup:null};
@@ -610,7 +620,7 @@ function setKeys(keys,val){
   const wasDayDone=!!dsb&&dsb.done===dsb.total;
   keys.forEach(k=>{if(val){if(!S.done[k])S.done[k]=ts}else delete S.done[k]});
   save();
-  {const tk0=currentK();const tks=tk0>=0&&DAYS[tk0]?new Set(dayKeys(DAYS[tk0])):new Set();if(keys.some(x=>!tks.has(x)))scheduleReplan()}
+  if(keys.some(x=>!T0.has(x)))scheduleReplan();
   const nowAll=doneCount()>=TOTAL;
   if(nowAll!==wasAll)renderHero();
   refresh();
